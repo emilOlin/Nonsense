@@ -19,3 +19,6 @@ Generate two random base64 values of size 58 and 2 until the shorter exists in t
 
 ## randomMd5
 Tries to randomly guess a md5 hash.
+
+## Matches
+Prints mutltiple columns of potentially matching hex values
