@@ -2,6 +2,7 @@ import string
 import secrets
 import time
 import sys
+from termcolor import colored, cprint
 
 def main():
     length = 14
@@ -19,21 +20,25 @@ def main():
 
     found = [0] * columns
     longFiller = ' ' * (length * 2)
-    shortFiller = ' ' * (int(length/divisor) * 2)
+    shortFiller = ' ' * (int(divisor) * 2)
 
     while 1:
         line = ''
         for i in range(columns):
             if found[i] == 0:
                 alpha = secrets.token_hex(length)
-                beta = secrets.token_hex(int(length/divisor))
+                beta = secrets.token_hex(int(divisor))
                 if beta in alpha:
-                    found[i] = secrets.randbelow(30)
-                line = line + ' ' + alpha + ' ' + beta
+                    cprint(' 0x' + alpha, 'green', end=' ')
+                    cprint('0x' + beta, 'green', end=' ')
+                    found[i] = 1 +secrets.randbelow(5)
+                else:
+                    cprint(' 0x' + alpha, 'magenta', end=' ')
+                    cprint('0x' + beta, 'magenta', end=' ')
             else:
-                line = line + ' ' + longFiller + ' ' + shortFiller
+                print('   ' + longFiller + '   ' + shortFiller, end=' ')
                 found[i] = found[i] - 1
-        print(line)
+        print()
         time.sleep(1/24)
 
 if __name__ == '__main__':
